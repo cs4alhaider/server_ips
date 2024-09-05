@@ -7,6 +7,7 @@ app = FastAPI()
 class IPLogEntry(BaseModel):
     ip_address: str
     timestamp: datetime.datetime
+    caller_url: str
 
 ip_log: list[IPLogEntry] = []
 
@@ -26,14 +27,19 @@ async def get_ip_log():
     """
     return ip_log
 
-@app.get("/")
+@app.get("/show-my-ip", response_model=IPLogEntry)
 async def show_my_ip(request: Request):
     """
     Log the client's IP address and return it.
     """
     # Get client's IP address
     client_ip = request.client.host
+    
     # Log the IP address with current timestamp
-    ip_log.append(IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now()))
+    ip_log.append(IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now(), caller_url=str(request.url)))
 
-    return {"ip_address": client_ip, "timestamp": datetime.datetime.now()}
+    return IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now(), caller_url=str(request.url))
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to the IP Logger API"}
