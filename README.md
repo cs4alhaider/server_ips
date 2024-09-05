@@ -4,9 +4,9 @@ This project is a simple API application that logs and displays client IP addres
 
 ## Main Features
 
-1. **IP Logging**: The application logs the IP address of each client that accesses the "/show-my-ip" endpoint.
+1. **IP Logging**: The application logs the IP address of each client that accesses the "/capture-my-ip" endpoint.
 
-2. **Display Current IP**: When a client accesses the "/show-my-ip" endpoint, it returns the client's IP address and the current timestamp.
+2. **Display Current IP**: When a client accesses the "/capture-my-ip" endpoint, it returns the client's IP address and the current timestamp.
 
 3. **IP Log Retrieval**: There's an endpoint ("/ip-log") that returns the entire log of IP addresses and their corresponding timestamps.
 
@@ -22,7 +22,7 @@ This project is a simple API application that logs and displays client IP addres
 
 - **Endpoints**:
   - `GET /`: Returns a welcome message and the source code link.
-  - `GET /show-my-ip`: Logs the client's IP and timestamp, and returns this information.
+  - `GET /capture-my-ip`: Logs the client's IP and timestamp, and returns this information.
   - `GET /ip-log`: Returns the entire IP log.
   - `DELETE /clear-ip-log`: Clears the IP log.
 
@@ -32,7 +32,7 @@ There's a commented-out middleware function that could be used to log IP address
 
 ## Running the Application
 
-To run the application, you need to have FastAPI and its dependencies installed. You can then run the FastAPI server using a command like `uvicorn main:app --reload`.
+To run the application, you need to have FastAPI and its dependencies installed. You can then run the FastAPI server using a command like `fastapi run main.py`.
 
 This project serves as a simple example of building a FastAPI application with basic logging functionality and demonstrates how to handle and log client information.
 
