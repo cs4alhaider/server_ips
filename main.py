@@ -26,7 +26,7 @@ async def get_ip_log():
     """
     return ip_log
 
-@app.get("/capture-my-ip", response_model=IPLogEntry)
+@app.get("/capture-my-ip", response_model=list[IPLogEntry])
 async def capture_my_ip(request: Request):
     """
     Log the client's IP address and return it.
@@ -37,7 +37,7 @@ async def capture_my_ip(request: Request):
     # Log the IP address with current timestamp
     ip_log.append(IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now()))
 
-    return IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now())
+    return [IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now())]
 
 @app.delete("/clear-ip-log")
 async def clear_ip_log():
