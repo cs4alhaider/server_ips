@@ -1,27 +1,30 @@
-# IP Logger FastAPI Project
+# IP Logger Through an API
 
-This project is a simple FastAPI application that logs and displays client IP addresses. It demonstrates basic usage of FastAPI, Pydantic models, and request handling.
+This project is a simple API application that logs and displays client IP addresses. It demonstrates basic usage of FastAPI, Pydantic models, and request handling.
 
 ## Main Features
 
 1. **IP Logging**: The application logs the IP address of each client that accesses the "/show-my-ip" endpoint.
 
-2. **Display Current IP**: When a client accesses the "/show-my-ip" endpoint, it returns the client's IP address, the current timestamp, and the caller URL.
+2. **Display Current IP**: When a client accesses the "/show-my-ip" endpoint, it returns the client's IP address and the current timestamp.
 
-3. **IP Log Retrieval**: There's an endpoint ("/ip-log") that returns the entire log of IP addresses, their corresponding timestamps, and caller URLs.
+3. **IP Log Retrieval**: There's an endpoint ("/ip-log") that returns the entire log of IP addresses and their corresponding timestamps.
+
+4. **Clear IP Log**: An endpoint ("/clear-ip-log") allows clearing the entire IP log.
 
 ## Key Components
 
 - **FastAPI Application**: The main FastAPI app is initialized in `main.py`.
 
-- **Pydantic Model**: `IPLogEntry` is a Pydantic model used to structure the IP log entries, ensuring type safety. It includes fields for IP address, timestamp, and caller URL.
+- **Pydantic Model**: `IPLogEntry` is a Pydantic model used to structure the IP log entries, ensuring type safety. It includes fields for IP address and timestamp.
 
 - **In-Memory Storage**: The `ip_log` list stores the IP log entries in memory.
 
 - **Endpoints**:
-  - `GET /`: Returns a welcome message.
-  - `GET /show-my-ip`: Logs the client's IP, timestamp, and caller URL, and returns this information.
+  - `GET /`: Returns a welcome message and the source code link.
+  - `GET /show-my-ip`: Logs the client's IP and timestamp, and returns this information.
   - `GET /ip-log`: Returns the entire IP log.
+  - `DELETE /clear-ip-log`: Clears the IP log.
 
 ## Note on Middleware
 
@@ -29,8 +32,10 @@ There's a commented-out middleware function that could be used to log IP address
 
 ## Running the Application
 
-The application is containerized using Docker. The `Dockerfile` and `requirements.txt` in the project ensure that all necessary dependencies are installed and the application runs in a consistent environment.
-
-To run the application, build the Docker image and run it, exposing the appropriate port (likely 80 or 8000).
+To run the application, you need to have FastAPI and its dependencies installed. You can then run the FastAPI server using a command like `uvicorn main:app --reload`.
 
 This project serves as a simple example of building a FastAPI application with basic logging functionality and demonstrates how to handle and log client information.
+
+## Source Code
+
+The source code for this project is available at: https://github.com/cs4alhaider/server_ips

@@ -7,7 +7,6 @@ app = FastAPI()
 class IPLogEntry(BaseModel):
     ip_address: str
     timestamp: datetime.datetime
-    caller_url: str
 
 ip_log: list[IPLogEntry] = []
 
@@ -40,6 +39,14 @@ async def show_my_ip(request: Request):
 
     return IPLogEntry(ip_address=client_ip, timestamp=datetime.datetime.now(), caller_url=str(request.url))
 
+@app.delete("/clear-ip-log")
+async def clear_ip_log():
+    """
+    Clear the list of logged IP addresses and their timestamps.
+    """
+    ip_log.clear()
+    return {"message": "IP log cleared"}
+
 @app.get("/")
 async def root():
-    return {"message": "Welcome to the IP Logger API"}
+    return {"message": "Welcome to the IP Logger API", "src": "https://github.com/cs4alhaider/server_ips"}
